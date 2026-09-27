@@ -67,14 +67,28 @@ async def grimnuke(interaction: discord.Interaction):
 
     if not isinstance(channel, SUPPORTED_CHANNEL_TYPES):
         await interaction.response.send_message(
-            "This channel type is not supported by GrimNukeBot.",
+            "This channel type is not supported by GrimNukeBot "
+            "(or I can't fully see this channel).",
+            ephemeral=True,
+        )
+        return
+
+    me = guild.me
+    perms = channel.permissions_for(me)
+
+    # Check view_channel explicitly: manage_channels can be True in the
+    # overwrites even if the bot can't actually see the channel, which
+    # would otherwise produce a misleading error message.
+    if not perms.view_channel:
+        await interaction.response.send_message(
+            "I can't see this channel (`View Channel` denied), "
+            "so I can't nuke it.",
             ephemeral=True,
         )
         return
 
     # Make sure the bot actually has permission to manage channels here.
-    me = guild.me
-    if not channel.permissions_for(me).manage_channels:
+    if not perms.manage_channels:
         await interaction.response.send_message(
             "I don't have the `Manage Channels` permission on this channel.",
             ephemeral=True,

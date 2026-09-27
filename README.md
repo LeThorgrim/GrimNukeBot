@@ -46,7 +46,7 @@ near-instant on the server the bot just joined.
 ## 3. Usage
 
 In any text, voice, stage, or forum channel where the bot has the
-`Manage Channels` permission:
+`Manage Channels` permission (and that the bot can access):
 
 ```
 /grimnuke
@@ -63,4 +63,4 @@ the command (checked both on Discord's side AND in the code).
 - Message history is of course lost (that's the whole point of a "nuke").
 - Threads from the original channel are not recreated.
 - If the bot doesn't have the `Manage Channels` permission on the target
-  channel, the command refuses to act rather than failing halfway through.
+  channel, or is unable to access the channel, the command refuses to act rather than failing halfway through.

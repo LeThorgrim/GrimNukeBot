@@ -99,7 +99,7 @@ async def grimnuke(interaction: discord.Interaction):
     # ephemeral message stays valid even if the original channel
     # disappears right after.
     await interaction.response.send_message(
-        "💣 GrimNuke in progress...", ephemeral=True
+        ":bomb: GrimNuke in progress...", ephemeral=True
     )
 
     original_position = channel.position
@@ -138,7 +138,10 @@ async def grimnuke(interaction: discord.Interaction):
     try:
         if isinstance(new_channel, (discord.TextChannel, discord.ForumChannel)):
             await new_channel.send(
-                f"✅ Channel recreated by {interaction.user.mention} via `/grimnuke`."
+                f":bomb: :boom: Channel nuked by {interaction.user.mention} via `/grimnuke`."
+            )
+            await new_channel.send(
+                "https://klipy.com/gifs/atomic-bomb-explosion-6"
             )
     except discord.HTTPException:
         pass

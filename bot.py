@@ -27,7 +27,12 @@ log = logging.getLogger("grimnukebot")
 # The bot doesn't need any privileged intents for this feature.
 intents = discord.Intents.default()
 
-bot = commands.Bot(command_prefix="!grimnuke-unused!", intents=intents)
+bot = commands.Bot(
+    command_prefix="!grimnuke-unused!",
+    intents=intents,
+    status=discord.Status.online,
+    activity=discord.Activity(type=discord.ActivityType.watching, name="/grimnuke || ThorgrimCorp."),
+)
 
 
 @bot.event
